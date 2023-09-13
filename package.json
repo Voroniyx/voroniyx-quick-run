@@ -1,0 +1,78 @@
+{
+  "name": "voroniyx-quick-run",
+  "displayName": "Voroniyx Quick Run",
+  "description": "Adds the possibility to execute a command or press some keys to open a terminal and execute a command",
+  "version": "0.0.1",
+  "author": {
+    "name": "Voroniyx",
+    "url": "https://github.com/Voroniyx"
+  },
+  "engines": {
+    "vscode": "^1.82.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "voroniyx.terminal.js",
+        "title": "Run your configured command for javascript"
+      },
+      {
+        "command": "voroniyx.terminal.ts",
+        "title": "Run your configured command for typescript"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "voroniyx.terminal.js",
+        "key": "ctrl+F1"
+      },
+      {
+        "command": "voroniyx.terminal.ts",
+        "key": "ctrl+F2"
+      }
+    ],
+    "configuration": [
+			{
+				"title": "Quick Commands configuration",
+				"type": "object",
+				"properties": {
+					"voroniyx.js.commandToExecute": {
+						"type": "string",
+						"default": "node index.js",
+						"description": "Controls which command will be executed when 'ctrl+F1' is pressed"
+					},
+          "voroniyx.ts.commandToExecute": {
+						"type": "string",
+						"default": "tsc && node dist/index.js",
+						"description": "Controls which command will be executed when 'ctrl+F2' is pressed"
+					}
+				}
+			}
+		]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.82.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "16.x",
+    "@typescript-eslint/eslint-plugin": "^6.4.1",
+    "@typescript-eslint/parser": "^6.4.1",
+    "eslint": "^8.47.0",
+    "glob": "^10.3.3",
+    "mocha": "^10.2.0",
+    "typescript": "^5.1.6",
+    "@vscode/test-electron": "^2.3.4"
+  }
+}
